@@ -1,8 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"gohub.com/bootstrap"
+)
 
 func main() {
-	fmt.Println("hello world!!!12")
-	fmt.Println("hahaha121112222ddd")
+
+	r := gin.New()
+
+	bootstrap.SetupRoute(r)
+
+	err := r.Run(":9501")
+	if err != nil {
+		// 错误处理，端口被占用了或者其他错误
+		fmt.Println(err.Error())
+	}
 }
