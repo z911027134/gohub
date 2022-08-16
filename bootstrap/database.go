@@ -3,6 +3,7 @@ package bootstrap
 import (
 	"errors"
 	"fmt"
+	"gohub.com/app/models/user"
 	"gohub.com/pkg/config"
 	"gohub.com/pkg/database"
 	"gorm.io/driver/mysql"
@@ -42,4 +43,6 @@ func SetupDB() {
 	// 设置每个链接的过期时间
 	database.SQLDB.SetConnMaxLifetime(time.Duration(config.GetInt("database.mysql.max_life_seconds")) * time.Second)
 
+	// migrate
+	database.DB.AutoMigrate(&user.User{})
 }
